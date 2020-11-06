@@ -1,0 +1,33 @@
+version: "3.7"
+services:
+  app:
+    build:
+      args:
+        user: felipe
+        uid: 1000
+      context: ./
+      dockerfile: Dockerfile
+    image: laravel-sqlite
+    container_name: laravel-sqlite-app
+    restart: unless-stopped
+    working_dir: /var/www/
+    volumes:
+      - ./:/var/www
+    networks:
+      - laravel-sqlite
+
+  nginx:
+    image: nginx:alpine
+    container_name: laravel-sqlite-nginx
+    restart: unless-stopped
+    ports:
+      - 8881:80
+    volumes:
+      - ./:/var/www
+      - ./docker-compose/nginx:/etc/nginx/conf.d/
+    networks:
+      - laravel-sqlite
+
+networks:
+  laravel-sqlite:
+    driver: bridge
