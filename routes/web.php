@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\JobController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [JobController::class, 'index']);
+Route::get('/edit/{job}', [JobController::class, 'edit'])->name('job.edit');
+Route::post('/update', [JobController::class, 'store'])->name('job.update');

@@ -1,13 +1,7 @@
 version: "3.7"
 services:
-  app:
-    build:
-      args:
-        user: felipe
-        uid: 1000
-      context: ./
-      dockerfile: Dockerfile
-    image: laravel-sqlite
+  app: 
+    image: dfelipegaitanh/laravelsqlite
     container_name: laravel-sqlite-app
     restart: unless-stopped
     working_dir: /var/www/
